@@ -1,0 +1,12 @@
+# Cara menjalankan ETL pipeline
+python main.py
+
+# Cara menjalankan unit test
+python -m pytest tests
+
+# Cara menjalankan test coverage
+coverage run -m pytest tests
+coverage report
+
+# File output
+products.csv
