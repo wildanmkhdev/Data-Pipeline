@@ -1,16 +1,18 @@
-import sys
-import os
 import pandas as pd
 from utils.transform import transform_data
 
 
 def test_transform_data_cleaning():
 
-    # Data dummy seperti data dari scraping
+    # Data dummy seperti hasil scraping
     data = {
         "Title": ["T-shirt 1", "Unknown Product", "Jacket 3"],
         "Price": ["$10.00", "$20.00", "Price Unavailable"],
-        "Rating": ["Rating: ⭐ 4.5 / 5", "Rating: ⭐ Invalid Rating / 5", "Rating: ⭐ 3.0 / 5"],
+        "Rating": [
+            "Rating: ⭐ 4.5 / 5",
+            "Rating: ⭐ Invalid Rating / 5",
+            "Rating: ⭐ 3.0 / 5"
+        ],
         "Colors": ["3 Colors", "5 Colors", "2 Colors"],
         "Size": ["Size: M", "Size: L", "Size: XL"],
         "Gender": ["Gender: Men", "Gender: Women", "Gender: Unisex"]
@@ -18,6 +20,7 @@ def test_transform_data_cleaning():
 
     df = pd.DataFrame(data)
 
+    # jalankan fungsi transform
     result = transform_data(df)
 
     # hanya 1 data valid harus tersisa

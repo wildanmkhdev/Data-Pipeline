@@ -4,7 +4,10 @@ import pandas as pd
 def transform_data(df):
 
     try:
-
+        print("===== DEBUG DATA =====")
+        print("Unknown Product:", (df["Title"] == "Unknown Product").sum())
+        print("Price Unavailable:", (df["Price"] == "Price Unavailable").sum())
+        print("Invalid Rating:", df["Rating"].str.contains("Invalid").sum())
         # hapus duplicate
         df = df.drop_duplicates()
 
@@ -22,16 +25,16 @@ def transform_data(df):
 
         # convert price
         df["Price"] = df["Price"].str.replace("$", "", regex=False)
-        df["Price"] = df["Price"].astype(float) * 16000
+        df["Price"] = (df["Price"].astype(float) * 16000).astype(int)
 
         # convert rating
         df["Rating"] = df["Rating"].str.replace("Rating: ⭐ ", "", regex=False)
         df["Rating"] = df["Rating"].str.replace(" / 5", "", regex=False)
         df["Rating"] = df["Rating"].astype(float)
 
-        # convert colors
+        # convert colors -> python int
         df["Colors"] = df["Colors"].str.replace(" Colors", "", regex=False)
-        df["Colors"] = df["Colors"].astype(int)
+        df["Colors"] = df["Colors"].apply(lambda x: int(x)).astype(object)
 
         # clean size
         df["Size"] = df["Size"].str.replace("Size: ", "", regex=False)
@@ -42,7 +45,5 @@ def transform_data(df):
         return df
 
     except Exception as e:
-
         print("Error transform:", e)
-
         return pd.DataFrame()

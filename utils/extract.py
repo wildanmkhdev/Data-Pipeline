@@ -77,7 +77,7 @@ def scrape_products():
             print("Error page:", page, e)
 
         # Delay supaya tidak diblok server
-        time.sleep(2)
+        time.sleep(2.5)
 
     df = pd.DataFrame(data)
 
